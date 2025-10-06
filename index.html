@@ -98,3 +98,19 @@
                 loadingIndicator.classList.add('hidden');
             }
         }
+
+        searchButton.addEventListener('click', () => {
+            fetchWeather(cityInput.value.trim());
+        });
+
+        cityInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                fetchWeather(cityInput.value.trim());
+            }
+        });
+        
+        fetchWeather('Yogyakarta'); 
+
+    </script> 
+</body>
+</html>
