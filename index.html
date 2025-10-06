@@ -69,3 +69,32 @@
                 </div>
             `;
         }
+
+        async function fetchWeather(city) {
+            if (!city) {
+                displayError("Masukkan lokasi.");
+                return;
+            }
+
+            const url = `${API_BASE_URL}?key=${API_KEY}&q=${encodeURIComponent(city)}&aqi=no`;
+            
+            loadingIndicator.classList.remove('hidden');
+            weatherResult.innerHTML = '';
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (response.ok) {
+                    displayData(data);
+                } else if (data.error && data.error.code === 1006) {
+                    displayError(`Lokasi "${city}" tidak ditemukan.`);
+                } else {
+                    displayError(`Gagal mengambil data: ${data.error.message}`);
+                }
+            } catch (e) {
+                displayError("Gagal terhubung ke API.");
+            } finally {
+                loadingIndicator.classList.add('hidden');
+            }
+        }
