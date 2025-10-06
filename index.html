@@ -35,3 +35,29 @@
             <p class="text-gray-400 text-center">Hasil akan muncul di sini.</p>
         </div>
     </div>
+
+        <script>
+        const API_KEY = "1b20c989c0374e26a6b40426250610";
+        const API_BASE_URL = "https://api.weatherapi.com/v1/current.json";
+
+        const cityInput = document.getElementById('cityInput');
+        const searchButton = document.getElementById('searchButton');
+        const weatherResult = document.getElementById('weatherResult');
+        const loadingIndicator = document.getElementById('loading');
+
+        function displayData(data) {
+            const locationData = data.location;
+            const currentData = data.current;
+
+            const htmlContent = `
+                <div class="flex justify-between items-center pb-2 border-b">
+                    <p class="text-lg font-bold text-blue-600">${locationData.name}</p>
+                    <p class="text-3xl font-extrabold text-red-600">${currentData.temp_c}°C</p>
+                </div>
+                <p>Negara: <span class="font-medium">${locationData.country}</span></p>
+                <p>Provinsi/Region: <span class="font-medium">${locationData.region || 'N/A'}</span></p>
+                <p>Kecamatan/Kota: <span class="font-medium">${locationData.name}</span></p>
+                <p>Latitude: <span class="font-mono">${locationData.lat}</span> | Longitude: <span class="font-mono">${locationData.lon}</span></p>
+            `;
+            weatherResult.innerHTML = htmlContent;
+        }
