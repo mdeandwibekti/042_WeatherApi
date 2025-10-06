@@ -61,3 +61,11 @@
             `;
             weatherResult.innerHTML = htmlContent;
         }
+
+        function displayError(message) {
+            weatherResult.innerHTML = `
+                <div class="p-2 bg-red-100 border border-red-400 text-red-700 rounded-md text-center">
+                    <p>${message}</p>
+                </div>
+            `;
+        }
